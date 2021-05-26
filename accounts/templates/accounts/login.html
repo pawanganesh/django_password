@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p style="color: #ff0000;">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+            <div style="color: red;">
+                <p>{{ form.non_field_errors }}</p>
+            </div>
+        {% endif %}
+        <button type="submit">Login</button>
+    </form>
+{% endblock content %}
